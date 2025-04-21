@@ -58,3 +58,31 @@ let imagemPassaro = new Image();
 let canoSuperiorImg = new Image();
 let canoInferiorImg = new Image();
 let botaoIniciarImg = new Image(); 
+
+
+function criarCanos(){
+    let alturaMaximaCano = alturaCanvas - distanciaCanos - 50;
+    let alturaCanoSuperior = Math.floor(Math.random() * alturaMaximaCano);
+    let alturaCanoInferior = alturaCanvas - alturaCanoSuperior - distanciaCanos;
+
+    let canoSuperior = {
+        x: larguraCanvas,
+        y: 0,
+        largura: larguraCanos,
+        altura: alturaCanoSuperior,
+        ultrapassado: false,
+        img: canoSuperiorImg
+    };
+    
+    let canoInferior = {
+        x: larguraCanvas,
+        y: alturaCanoSuperior + distanciaCanos,
+        largura: larguraCanos,
+        altura: alturaCanoInferior,
+        ultrapassado: false,
+        img: canoInferiorImg
+    };
+    
+
+    canosArray.push(canoSuperior, canoInferior);
+}
