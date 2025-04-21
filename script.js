@@ -133,3 +133,42 @@ function menu() {
     }
 }
 
+function jogo() {
+    velocidadeVertical += gravidadePassaro;
+    passaro.y = Math.max(passaro.y + velocidadeVertical, 0);
+    contexto.drawImage(imagemPassaro, passaro.x, passaro.y, passaro.largura, passaro.altura);
+
+    if(passaro.y > canvas.altura){
+        estadoAtualJogo = statusJogo.VOCE_PERDEU;
+    }
+
+    for(let index = 0; index < canosArray.length; index++){
+        let cano = canosArray[index];
+ 
+        cano.x += velocidadeHorizontal;
+        
+        contexto.drawImage(cano.img, cano.x, cano.y, cano.largura, cano.altura);
+        
+        if (!cano.ultrapassado && passaro.x > cano.x + cano.largura) {
+            pontuacao += 10;
+            cano.ultrapassado = true;
+        }
+
+        if(colisao(passaro, cano)){
+            estadoAtualJogo = statusJogo.VOCE_PERDEU;
+        }
+        if (colisaoComChao(passaro)) {
+            estadoAtualJogo = statusJogo.VOCE_PERDEU;
+        }
+        
+    }
+
+    while(canosArray.length > 0 && canosArray[0].x < -larguraCanos){
+        canosArray.shift();
+    }
+
+    contexto.fillStyle = 'white',
+    contexto.font = '34px sans-serif',
+    contexto.textAlign = 'center';
+    contexto.fillText(pontuacao, larguraCanvas / 2, 45);
+}
