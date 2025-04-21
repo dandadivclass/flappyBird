@@ -114,3 +114,22 @@ function loopJogo() {
         vocePerdeu();
     }
 }
+
+function menu() {
+    if (imagemFundo.complete) {
+        contexto.drawImage(imagemFundo, 0, 0, larguraCanvas, alturaCanvas);
+    }
+
+    if (botaoIniciarImg.complete) {
+        contexto.drawImage(botaoIniciarImg, botaoIniciar.x, botaoIniciar.y, botaoIniciar.largura, botaoIniciar.altura);
+    }
+
+    if (imagemTitulo.complete) {
+        let proporcao = imagemTitulo.naturalHeight / imagemTitulo.naturalWidth;
+        let scaleLargura = logoJogo.largura;
+        let scaleAltura = scaleLargura * proporcao;
+
+        contexto.drawImage(imagemTitulo, logoJogo.x, logoJogo.y, scaleLargura, scaleAltura);
+    }
+}
+
