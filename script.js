@@ -86,3 +86,31 @@ function criarCanos(){
 
     canosArray.push(canoSuperior, canoInferior);
 }
+
+window.onload = function() {
+    canvas.height = alturaCanvas;
+    canvas.width = larguraCanvas;
+
+    imagemPassaro.src = './assets/flappybird.png';
+
+    canoSuperiorImg.src = './assets/toppipe.png';
+
+    canoInferiorImg.src = './assets/bottompipe.png';
+
+    botaoIniciarImg.src = './assets/flappyBirdPlayButton.png';
+
+    requestAnimationFrame(loopJogo);
+} 
+
+function loopJogo() {
+    requestAnimationFrame(loopJogo);
+    contexto.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (estadoAtualJogo === statusJogo.MENU)  {
+        menu();
+    }else if(estadoAtualJogo === statusJogo.JOGANDO) {
+        jogo();
+    }else if(estadoAtualJogo === statusJogo.VOCE_PERDEU) {
+        vocePerdeu();
+    }
+}
