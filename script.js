@@ -71,7 +71,8 @@ function criarCanos(){
         largura: larguraCanos,
         altura: alturaCanoSuperior,
         ultrapassado: false,
-        img: canoSuperiorImg
+        img: canoSuperiorImg,
+        superior: true
     };
     
     let canoInferior = {
@@ -149,8 +150,8 @@ function jogo() {
         
         contexto.drawImage(cano.img, cano.x, cano.y, cano.largura, cano.altura);
         
-        if (!cano.ultrapassado && passaro.x > cano.x + cano.largura) {
-            pontuacao += 10;
+        if (!cano.ultrapassado && passaro.x > cano.x + cano.largura && cano.superior) {
+            pontuacao += 5;
             cano.ultrapassado = true;
         }
 
