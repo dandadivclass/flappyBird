@@ -167,8 +167,48 @@ function jogo() {
         canosArray.shift();
     }
 
-    contexto.fillStyle = 'white',
-    contexto.font = '34px sans-serif',
+    contexto.fillStyle = 'white';
+    contexto.font = '34px sans-serif';
     contexto.textAlign = 'center';
     contexto.fillText(pontuacao, larguraCanvas / 2, 45);
+}
+
+function vocePerdeu() {
+    if(vocePerdeuImg.complete) {
+        let larguraImg = 400;
+        let alturaImg = 80;
+        let x = (larguraCanvas - larguraImg) / 2;
+        let y = alturaCanvas / 3;
+
+        contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg);
+
+        let pontuacaoTexto = `PONTUAÇÃO: ${pontuacao}`;
+        contexto.fillStyle = 'white',
+        contexto.font = '35px "Nova Flat", sans-serif',
+        contexto.textAlign = 'center',
+        contexto.fillText(pontuacaoTexto, larguraCanvas / 2, y + alturaImg + 50);
+
+        bloquearInteracao = true;
+        setTimeout(() => {
+            bloquearInteracao = false;
+        }, 1000);
+
+    }
+}
+
+function teclas(event) {
+    if (bloquearInteracao) return;
+
+    if (event.code === 'Space') {
+        event.preventDefault(); 
+        console.log('Barra de espaço pressionada');
+
+        if (estadoAtualJogo === statusJogo.MENU) {
+            iniciarJogo();
+        } else if (estadoAtualJogo === statusJogo.VOCE_PERDEU) {
+            iniciarJogo();
+        } else if (estadoAtualJogo === statusJogo.JOGANDO) {
+            velocidadeVertical = -6;  
+        }
+    }
 }
