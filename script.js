@@ -3,9 +3,12 @@ let contexto = canvas.getContext('2d');
 let larguraCanvas = 360;
 let alturaCanvas = 640;
 let imagemFundo = new Image();
-imagemFundo.src = './assets/fundoLaranja.png';
+imagemFundo.src = './assets/startFundo.jpeg';
 let bloquearInteracao = false;
-let pontuacao = 0;
+let pontuacaoInicial = document.querySelector('.pontuacao-numero');
+const botaoJogarNovamente = document.querySelector('.botao-jogar');
+const sairOuJogar = document.querySelector('.sair-ou-jogar');
+sairOuJogar.style.display = 'none';
 
 document.addEventListener('keydown', teclas);
 
@@ -59,6 +62,9 @@ let canoSuperiorImg = new Image();
 let canoInferiorImg = new Image();
 let botaoIniciarImg = new Image(); 
 
+const atribuirPontuacao = () => {
+    pontuacaoInicial.innerText = parseInt(pontuacaoInicial.innerText) + 5;
+}
 
 function criarCanos(){
     let alturaMaximaCano = alturaCanvas - distanciaCanos - 50;
@@ -118,7 +124,7 @@ function loopJogo() {
 
 function menu() {
     if (imagemFundo.complete) {
-        contexto.drawImage(imagemFundo, 0, 0, larguraCanvas, alturaCanvas);
+        contexto.drawImage(imagemFundo, 0, 0, 400, 645);
     }
 
     if (botaoIniciarImg.complete) {
@@ -151,7 +157,7 @@ function jogo() {
         contexto.drawImage(cano.img, cano.x, cano.y, cano.largura, cano.altura);
         
         if (!cano.ultrapassado && passaro.x > cano.x + cano.largura && cano.superior) {
-            pontuacao += 5;
+            atribuirPontuacao();
             cano.ultrapassado = true;
         }
 
@@ -168,10 +174,7 @@ function jogo() {
         canosArray.shift();
     }
 
-    contexto.fillStyle = 'white';
-    contexto.font = '34px sans-serif';
-    contexto.textAlign = 'center';
-    contexto.fillText(pontuacao, larguraCanvas / 2, 45);
+ 
 }
 
 function vocePerdeu() {
@@ -183,11 +186,13 @@ function vocePerdeu() {
 
         contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg);
 
-        let pontuacaoTexto = `PONTUAÇÃO: ${pontuacao}`;
+        let pontuacaoTexto = `PONTUAÇÃO: ${pontuacaoInicial.innerText}`;
         contexto.fillStyle = 'white',
-        contexto.font = '35px "Nova Flat", sans-serif',
+        contexto.font = '25px "Special Gothic Expanded One", sans-serif',
         contexto.textAlign = 'center',
         contexto.fillText(pontuacaoTexto, larguraCanvas / 2, y + alturaImg + 50);
+
+        sairOuJogar.style.display = 'flex'; 
 
         bloquearInteracao = true;
         setTimeout(() => {
@@ -229,8 +234,15 @@ function resetarJogo() {
     passaro.y = passaroVertical;
     velocidadeVertical = 0;
     canosArray = [];
-    pontuacao = 0;
+    pontuacaoInicial.innerText = '0';
 }
+
+botaoJogarNovamente.addEventListener('click', () => {
+    resetarJogo();
+    iniciarJogo();
+    sairOuJogar.style.display = 'none';
+})
+
 
 function colisao(passaro, cano){
     let margem = 5;

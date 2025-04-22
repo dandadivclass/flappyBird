@@ -4,25 +4,64 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-align: center;
 }
+
 body {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: "Special Gothic Expanded One", sans-serif;
-    background-image: url(assets/fundo.png);
+    background-image: url(assets/start-imagem2.jpeg);
 }
 
 .jogo {
-    height: 70%;
-    width: 20%;
+    height: 80%;
+    width: 23%;
 }
 
+.pontuacao-texto {
+    align-self: start;
+    color: white;
+}
+    .pontuacao-numero {
+        margin-left: 10px;
+    }
+
 #canvas {
-    background-image: url(assets/fundoLaranja.png);
+    background-image: url(assets/fundoRoxo.jpeg);
+    background-position: 100%;
+    background-size: cover;
     height: 100%;
     width: 100%;
     align-self: center;
+    position: relative;
 }
+
+.sair-ou-jogar {
+    position: absolute;
+    bottom: 25%;
+    right: 45.2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.botao {
+    padding: 15px 10px 15px 10px;
+    border: none;
+    background-color: #886bb6;
+    border-radius: 9px;
+    font-family: "Special Gothic Expanded One", sans-serif;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
+    .botao-jogar, .sair-jogo {
+        cursor: pointer;
+    }
+    .sair-jogo {
+        width: 100%;
+        text-decoration: none;
+    }
