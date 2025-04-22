@@ -230,3 +230,17 @@ function resetarJogo() {
     canosArray = [];
     pontuacao = 0;
 }
+
+function colisao(passaro, cano){
+    let margem = 5;
+    return (
+        passaro.x + margem < cano.x + cano.largura &&
+        passaro.x + passaro.largura - margem > cano.x &&
+        passaro.y + margem < cano.y + cano.altura &&
+        passaro.y + passaro.altura - margem > cano.y
+    );
+}
+
+function colisaoComChao(passaro) {
+    return passaro.y + passaro.altura >= alturaCanvas;
+}
