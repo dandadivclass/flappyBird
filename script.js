@@ -53,7 +53,7 @@ let velocidadeHorizontal = -2;
 let gravidadePassaro = 0.5;
 let passaroVertical = alturaCanvas / 2;
 let larguraCanos = 50;
-let distanciaCanos = 250;
+let distanciaCanos = 180;
 let canosArray = [];
 let canosIntervaloId; 
 
@@ -104,8 +104,6 @@ window.onload = function() {
 
     canoInferiorImg.src = './assets/bottompipe.png';
 
-    botaoIniciarImg.src = './assets/flappyBirdPlayButton.png';
-
     requestAnimationFrame(loopJogo);
 } 
 
@@ -127,10 +125,6 @@ function menu() {
         contexto.drawImage(imagemFundo, 0, 0, 400, 645);
     }
 
-    if (botaoIniciarImg.complete) {
-        contexto.drawImage(botaoIniciarImg, botaoIniciar.x, botaoIniciar.y, botaoIniciar.largura, botaoIniciar.altura);
-    }
-
     if (imagemTitulo.complete) {
         let proporcao = imagemTitulo.naturalHeight / imagemTitulo.naturalWidth;
         let scaleLargura = logoJogo.largura;
@@ -138,6 +132,11 @@ function menu() {
 
         contexto.drawImage(imagemTitulo, logoJogo.x, logoJogo.y, scaleLargura, scaleAltura);
     }
+
+    contexto.fillStyle = '#4d0349'; 
+    contexto.font = '18px "Special Gothic Expanded One", sans-serif'; 
+    contexto.textAlign = 'center'; 
+    contexto.fillText('Pressione Espaço para iniciar', larguraCanvas / 2, alturaCanvas / 2 + 6);  
 }
 
 function jogo() {
@@ -212,7 +211,7 @@ function teclas(event) {
         if (estadoAtualJogo === statusJogo.MENU) {
             iniciarJogo();
         } else if (estadoAtualJogo === statusJogo.VOCE_PERDEU) {
-            iniciarJogo();
+            return
         } else if (estadoAtualJogo === statusJogo.JOGANDO) {
             velocidadeVertical = -6;  
         }
