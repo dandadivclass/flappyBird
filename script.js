@@ -212,3 +212,21 @@ function teclas(event) {
         }
     }
 }
+
+function iniciarJogo() {
+    resetarJogo();
+    estadoAtualJogo = statusJogo.JOGANDO;
+
+    if(canosIntervaloId){
+        clearInterval(canosIntervaloId);
+    }
+
+    canosIntervaloId = setInterval(criarCanos, 1500);
+}
+
+function resetarJogo() {
+    passaro.y = passaroVertical;
+    velocidadeVertical = 0;
+    canosArray = [];
+    pontuacao = 0;
+}
