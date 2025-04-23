@@ -2,8 +2,7 @@ let canvas = document.getElementById('canvas');
 let contexto = canvas.getContext('2d');
 let larguraCanvas = 360;
 let alturaCanvas = 640;
-let imagemFundo = new Image();
-imagemFundo.src = './assets/startFundo.jpeg';
+let imagemFundo = new Image(); imagemFundo.src = './assets/startFundo.jpeg';
 let bloquearInteracao = false;
 let pontuacaoInicial = document.querySelector('.pontuacao-numero');
 const botaoJogarNovamente = document.querySelector('.botao-jogar');
@@ -12,7 +11,7 @@ sairOuJogar.style.display = 'none';
 const botaoRegras = document.querySelector('.botao-regras');
 const modalRegras = document.querySelector('.container-placa');
 const botaoModal = document.getElementById('botao-modal');
-let displayModal = modalRegras.style.display = 'none';
+
 document.addEventListener('keydown', teclas);
 let statusJogo = {
     MENU: 'menu',
@@ -41,14 +40,23 @@ let velocidadeHorizontal = -2;
 let gravidadePassaro = 0.5;
 let passaroVertical = alturaCanvas / 2;
 let larguraCanos = 50;
-let distanciaCanos = 180;
+let distanciaCanos = 150;
 let canosArray = [];
 let canosIntervaloId; 
 let imagemPassaro = new Image();
 let canoSuperiorImg = new Image();
-let canoInferiorImg = new Image();
+let canoInferiorImg = new Image(); 
 
 
+let pontuacaoFinalJogo = parseInt(pontuacaoInicial.innerText);
+let recordeAtualizado = parseInt(recorde.innerText);
+let recorde = document.querySelector('.recorde-numero');
+let recordeSalvo = localStorage.getItem('recorde');
+if (recordeSalvo) {
+    recorde.innerText = recordeSalvo;
+} else {
+    recorde.innerText = '0';
+}
 
 
 function atribuirPontuacao() {
@@ -56,6 +64,8 @@ function atribuirPontuacao() {
 }
 
 function abrirFecharModal() {
+    let displayModal;
+    displayModal = modalRegras.style.display = 'none';
 
     botaoRegras.addEventListener('click', () => {
         displayModal = modalRegras.style.display = 'flex'
@@ -189,15 +199,14 @@ function vocePerdeu() {
         let x = (larguraCanvas - larguraImg) / 2;
         let y = alturaCanvas / 3;
 
-        contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg);
-
-        let pontuacaoTexto = `PONTUAÇÃO: ${pontuacaoInicial.innerText}`;
-        contexto.fillStyle = 'white',
-        contexto.font = '25px "Special Gothic Expanded One", sans-serif',
-        contexto.textAlign = 'center',
-        contexto.fillText(pontuacaoTexto, larguraCanvas / 2, y + alturaImg + 50);
+        contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg); 
 
         sairOuJogar.style.display = 'flex'; 
+
+        if (pontuacaoFinalJogo > recordeAtualizado) {
+            recorde.innerText = pontuacaoFinalJogo.toString();
+            localStorage.setItem('recorde', pontuacaoFinalJogo.toString());
+        }
 
         bloquearInteracao = true;
         setTimeout(() => {
