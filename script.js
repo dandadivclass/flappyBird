@@ -2,69 +2,83 @@ let canvas = document.getElementById('canvas');
 let contexto = canvas.getContext('2d');
 let larguraCanvas = 360;
 let alturaCanvas = 640;
-let imagemFundo = new Image();
-imagemFundo.src = './assets/startFundo.jpeg';
+let imagemFundo = new Image(); imagemFundo.src = './assets/startFundo.jpeg';
 let bloquearInteracao = false;
 let pontuacaoInicial = document.querySelector('.pontuacao-numero');
 const botaoJogarNovamente = document.querySelector('.botao-jogar');
 const sairOuJogar = document.querySelector('.sair-ou-jogar');
 sairOuJogar.style.display = 'none';
+const botaoRegras = document.querySelector('.botao-regras');
+const modalRegras = document.querySelector('.container-placa');
+const botaoModal = document.getElementById('botao-modal');
 
 document.addEventListener('keydown', teclas);
-
 let statusJogo = {
     MENU: 'menu',
     JOGANDO: 'jogando',
     VOCE_PERDEU: 'vocePerdeu'
 }
-
 let estadoAtualJogo = statusJogo.MENU;
-
-let botaoIniciar = {
-    x: larguraCanvas / 2 - 115.5 / 2,
-    y: alturaCanvas / 2 - 64 / 2,
-    largura: 115,
-    altura: 64
-}
-
 export let logoJogo = {
     x: larguraCanvas / 2 - 300 / 2,
     y: alturaCanvas / 4,  
     largura: 300,
     altura: 100
 };
-
-
 let imagemTitulo = new Image();
 imagemTitulo.src = './assets/flappyBirdLogo.png';
-
 let vocePerdeuImg = new Image();
 vocePerdeuImg.src = './assets/flappy-gameover.png';
-
 let passaro = {
     x: 50,
     y: alturaCanvas / 2,
     largura: 40,
     altura: 30
 }
-
 let velocidadeVertical = 0;
 let velocidadeHorizontal = -2;
 let gravidadePassaro = 0.5;
 let passaroVertical = alturaCanvas / 2;
 let larguraCanos = 50;
-let distanciaCanos = 180;
+let distanciaCanos = 200;
 let canosArray = [];
 let canosIntervaloId; 
-
 let imagemPassaro = new Image();
 let canoSuperiorImg = new Image();
-let canoInferiorImg = new Image();
-let botaoIniciarImg = new Image(); 
+let canoInferiorImg = new Image(); 
 
-const atribuirPontuacao = () => {
+
+let recorde = document.querySelector('.recorde-numero');
+let recordeSalvo = localStorage.getItem('recorde');
+if (recordeSalvo) {
+    recorde.innerText = recordeSalvo;
+} else {
+    recorde.innerText = '0';
+}
+
+
+function atribuirPontuacao() {
     pontuacaoInicial.innerText = parseInt(pontuacaoInicial.innerText) + 5;
 }
+
+let displayModal;
+displayModal = modalRegras.style.display = 'none';
+function abrirFecharModal() {
+
+    botaoRegras.addEventListener('click', () => {
+        displayModal = modalRegras.style.display = 'flex'
+        console.log('sdf');
+        
+    })
+
+    botaoModal.addEventListener('click', () => {
+        displayModal = modalRegras.style.display = 'none'
+        console.log('sdf');
+        
+    })
+}
+
+abrirFecharModal();
 
 function criarCanos(){
     let alturaMaximaCano = alturaCanvas - distanciaCanos - 50;
@@ -185,19 +199,20 @@ function vocePerdeu() {
 
         contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg);
 
-        let pontuacaoTexto = `PONTUAÇÃO: ${pontuacaoInicial.innerText}`;
-        contexto.fillStyle = 'white',
-        contexto.font = '25px "Special Gothic Expanded One", sans-serif',
-        contexto.textAlign = 'center',
-        contexto.fillText(pontuacaoTexto, larguraCanvas / 2, y + alturaImg + 50);
+        sairOuJogar.style.display = 'flex';
 
-        sairOuJogar.style.display = 'flex'; 
+        let pontuacaoDoJogo = parseInt(pontuacaoInicial.innerText);
+        let recordeAtualizado = parseInt(recorde.innerText);
+
+        if (pontuacaoDoJogo > recordeAtualizado) {
+            recorde.innerText = pontuacaoDoJogo.toString();
+            localStorage.setItem('recorde', pontuacaoDoJogo.toString());
+        }
 
         bloquearInteracao = true;
         setTimeout(() => {
             bloquearInteracao = false;
         }, 1000);
-
     }
 }
 

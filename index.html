@@ -9,12 +9,26 @@
 </head>
 <body>
     <div class="jogo">
-        <h2 class="pontuacao-texto">Pontuação: <span class="pontuacao-numero">0</span></h2>
+        <div class="pontuacao-recorde-div">
+            <h2 class="pontuacao-texto">Pontuação: <span class="pontuacao-numero">0</span></h2>
+            <h2 class="recorde-texto">Recorde: <span class="recorde-numero">0</span></h2>
+        </div>
         <canvas id="canvas"></canvas>
 
         <div class="sair-ou-jogar">
             <button class="botao-jogar botao"><span>JOGAR NOVAMENTE</span></button>
             <a class="sair-jogo botao" href="../index.html">SAIR</a>
+        </div>
+        <div class="div-botao-regras">
+            <button class="botao-regras botao">Regras</button>
+        </div>
+    </div>
+    <div class="container-placa">
+        <div class="div-placa">
+            <p>Para pontuar, passe por entre os canos sem bater</p>
+            <p>Utilize 'Espaço' para pular com o Faby</p>
+            <p>Tente fazer a maior pontuação que conseguir!</p>
+            <a id="botao-modal" href="index.html">Entendi!</a>
         </div>
     </div>
 </body>
