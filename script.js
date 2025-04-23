@@ -9,45 +9,33 @@ let pontuacaoInicial = document.querySelector('.pontuacao-numero');
 const botaoJogarNovamente = document.querySelector('.botao-jogar');
 const sairOuJogar = document.querySelector('.sair-ou-jogar');
 sairOuJogar.style.display = 'none';
-
+const botaoRegras = document.querySelector('.botao-regras');
+const modalRegras = document.querySelector('.container-placa');
+const botaoModal = document.getElementById('botao-modal');
+let displayModal = modalRegras.style.display = 'none';
 document.addEventListener('keydown', teclas);
-
 let statusJogo = {
     MENU: 'menu',
     JOGANDO: 'jogando',
     VOCE_PERDEU: 'vocePerdeu'
 }
-
 let estadoAtualJogo = statusJogo.MENU;
-
-let botaoIniciar = {
-    x: larguraCanvas / 2 - 115.5 / 2,
-    y: alturaCanvas / 2 - 64 / 2,
-    largura: 115,
-    altura: 64
-}
-
 export let logoJogo = {
     x: larguraCanvas / 2 - 300 / 2,
     y: alturaCanvas / 4,  
     largura: 300,
     altura: 100
 };
-
-
 let imagemTitulo = new Image();
 imagemTitulo.src = './assets/flappyBirdLogo.png';
-
 let vocePerdeuImg = new Image();
 vocePerdeuImg.src = './assets/flappy-gameover.png';
-
 let passaro = {
     x: 50,
     y: alturaCanvas / 2,
     largura: 40,
     altura: 30
 }
-
 let velocidadeVertical = 0;
 let velocidadeHorizontal = -2;
 let gravidadePassaro = 0.5;
@@ -56,15 +44,33 @@ let larguraCanos = 50;
 let distanciaCanos = 180;
 let canosArray = [];
 let canosIntervaloId; 
-
 let imagemPassaro = new Image();
 let canoSuperiorImg = new Image();
 let canoInferiorImg = new Image();
-let botaoIniciarImg = new Image(); 
 
-const atribuirPontuacao = () => {
+
+
+
+function atribuirPontuacao() {
     pontuacaoInicial.innerText = parseInt(pontuacaoInicial.innerText) + 5;
 }
+
+function abrirFecharModal() {
+
+    botaoRegras.addEventListener('click', () => {
+        displayModal = modalRegras.style.display = 'flex'
+        console.log('sdf');
+        
+    })
+
+    botaoModal.addEventListener('click', () => {
+        displayModal = modalRegras.style.display = 'none'
+        console.log('sdf');
+        
+    })
+}
+
+abrirFecharModal();
 
 function criarCanos(){
     let alturaMaximaCano = alturaCanvas - distanciaCanos - 50;
