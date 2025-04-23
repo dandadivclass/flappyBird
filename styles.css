@@ -21,13 +21,21 @@ body {
     width: 23%;
 }
 
+.pontuacao-recorde-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .pontuacao-texto {
     align-self: start;
     color: white;
 }
-    .pontuacao-numero {
-        margin-left: 10px;
-    }
+ 
+
+.recorde-texto, .recorde-numero {
+    color: #fff;
+}
 
 #canvas {
     background-image: url(assets/fundoRoxo.jpeg);
@@ -53,7 +61,7 @@ body {
     padding: 15px 10px 15px 10px;
     border: none;
     background-color: #32185e;
-    color: #c4aceb;
+    color: #d3c2f0;
     border-radius: 9px;
     font-family: "Special Gothic Expanded One", sans-serif;
     font-size: 15px;
@@ -113,7 +121,7 @@ body {
     .div-placa a {
         text-decoration: none;
         background-color: #32185e;
-        color: #c4aceb;
+        color: #d3c2f0;
         padding: 15px 10px 15px 10px;
         border-radius: 10px;
         margin-top: 20px;
