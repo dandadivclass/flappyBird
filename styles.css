@@ -7,8 +7,9 @@
 }
 
 body {
-    height: 100vh;
+    height: 95vh;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     font-family: "Special Gothic Expanded One", sans-serif;
@@ -64,4 +65,55 @@ body {
     .sair-jogo {
         width: 100%;
         text-decoration: none;
+    }
+
+.div-botao-regras {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .botao-regras {
+        background-color: #32185e;
+        align-items: center;
+    }
+
+.container-placa {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: #00000080; 
+    z-index: 1000;
+}
+    .div-placa {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.123), rgba(0, 0, 0, 0.301), rgba(0, 0, 0, 0.37)), url(assets/fundoMadeira.jpeg);
+        background-size: cover;
+        width: 30%;
+        height: 50%;
+        border: 3px solid;
+        border-color: #ffdf299c;
+        border-radius: 5px;
+    }
+    .div-placa p {
+        margin: 10px;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 21px;
+    }
+    .div-placa a {
+        text-decoration: none;
+        color: #c4aceb;
+        padding: 15px 10px 15px 10px;
+        border-radius: 10px;
+        background-color: #32185e;
+        margin-top: 20px;
     }
