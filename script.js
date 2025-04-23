@@ -40,7 +40,7 @@ let velocidadeHorizontal = -2;
 let gravidadePassaro = 0.5;
 let passaroVertical = alturaCanvas / 2;
 let larguraCanos = 50;
-let distanciaCanos = 150;
+let distanciaCanos = 200;
 let canosArray = [];
 let canosIntervaloId; 
 let imagemPassaro = new Image();
@@ -48,8 +48,6 @@ let canoSuperiorImg = new Image();
 let canoInferiorImg = new Image(); 
 
 
-let pontuacaoFinalJogo = parseInt(pontuacaoInicial.innerText);
-let recordeAtualizado = parseInt(recorde.innerText);
 let recorde = document.querySelector('.recorde-numero');
 let recordeSalvo = localStorage.getItem('recorde');
 if (recordeSalvo) {
@@ -63,9 +61,9 @@ function atribuirPontuacao() {
     pontuacaoInicial.innerText = parseInt(pontuacaoInicial.innerText) + 5;
 }
 
+let displayModal;
+displayModal = modalRegras.style.display = 'none';
 function abrirFecharModal() {
-    let displayModal;
-    displayModal = modalRegras.style.display = 'none';
 
     botaoRegras.addEventListener('click', () => {
         displayModal = modalRegras.style.display = 'flex'
@@ -199,20 +197,22 @@ function vocePerdeu() {
         let x = (larguraCanvas - larguraImg) / 2;
         let y = alturaCanvas / 3;
 
-        contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg); 
+        contexto.drawImage(vocePerdeuImg, x, y, larguraImg, alturaImg);
 
-        sairOuJogar.style.display = 'flex'; 
+        sairOuJogar.style.display = 'flex';
 
-        if (pontuacaoFinalJogo > recordeAtualizado) {
-            recorde.innerText = pontuacaoFinalJogo.toString();
-            localStorage.setItem('recorde', pontuacaoFinalJogo.toString());
+        let pontuacaoDoJogo = parseInt(pontuacaoInicial.innerText);
+        let recordeAtualizado = parseInt(recorde.innerText);
+
+        if (pontuacaoDoJogo > recordeAtualizado) {
+            recorde.innerText = pontuacaoDoJogo.toString();
+            localStorage.setItem('recorde', pontuacaoDoJogo.toString());
         }
 
         bloquearInteracao = true;
         setTimeout(() => {
             bloquearInteracao = false;
         }, 1000);
-
     }
 }
 
