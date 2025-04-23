@@ -52,10 +52,10 @@ body {
 .botao {
     padding: 15px 10px 15px 10px;
     border: none;
-    background-color: #886bb6;
+    background-color: #32185e;
+    color: #c4aceb;
     border-radius: 9px;
     font-family: "Special Gothic Expanded One", sans-serif;
-    color: #fff;
     font-size: 15px;
     text-align: center;
 }
@@ -75,6 +75,7 @@ body {
     .botao-regras {
         background-color: #32185e;
         align-items: center;
+        cursor: pointer;
     }
 
 .container-placa {
@@ -111,9 +112,9 @@ body {
     }
     .div-placa a {
         text-decoration: none;
+        background-color: #32185e;
         color: #c4aceb;
         padding: 15px 10px 15px 10px;
         border-radius: 10px;
-        background-color: #32185e;
         margin-top: 20px;
     }
