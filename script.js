@@ -61,27 +61,24 @@ function atribuirPontuacao() {
     pontuacaoInicial.innerText = parseInt(pontuacaoInicial.innerText) + 5;
 }
 
-let displayModal;
-displayModal = modalRegras.style.display = 'none';
 function abrirFecharModal() {
+    modalRegras.style.display = 'none';
 
     botaoRegras.addEventListener('click', () => {
-        displayModal = modalRegras.style.display = 'flex'
+        modalRegras.style.display = 'flex';
         console.log('sdf');
-        
-    })
+    });
 
     botaoModal.addEventListener('click', () => {
-        displayModal = modalRegras.style.display = 'none'
+        modalRegras.style.display = 'none';
         console.log('sdf');
-        
-    })
+    });
 }
 
 abrirFecharModal();
 
 function criarCanos(){
-    let alturaMaximaCano = alturaCanvas - distanciaCanos - 50;
+    let alturaMaximaCano = alturaCanvas - distanciaCanos; //390
     let alturaCanoSuperior = Math.floor(Math.random() * alturaMaximaCano);
     let alturaCanoInferior = alturaCanvas - alturaCanoSuperior - distanciaCanos;
 
@@ -258,15 +255,27 @@ botaoJogarNovamente.addEventListener('click', () => {
 })
 
 
-function colisao(passaro, cano){
-    let margem = 5;
+function colisao(passaro, cano) {
+    const margem = 5;
+
+    const passaroEsquerda = passaro.x + margem;
+    const passaroDireita = passaro.x + passaro.largura - margem;
+    const passaroTopo = passaro.y + margem;
+    const passaroBase = passaro.y + passaro.altura - margem;
+
+    const canoEsquerda = cano.x;
+    const canoDireita = cano.x + cano.largura;
+    const canoTopo = cano.y;
+    const canoBase = cano.y + cano.altura;
+
     return (
-        passaro.x + margem < cano.x + cano.largura &&
-        passaro.x + passaro.largura - margem > cano.x &&
-        passaro.y + margem < cano.y + cano.altura &&
-        passaro.y + passaro.altura - margem > cano.y
+        passaroDireita > canoEsquerda &&
+        passaroEsquerda < canoDireita &&
+        passaroBase > canoTopo &&
+        passaroTopo < canoBase
     );
 }
+
 
 function colisaoComChao(passaro) {
     return passaro.y + passaro.altura >= alturaCanvas;
